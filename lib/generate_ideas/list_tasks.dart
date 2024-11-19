@@ -40,6 +40,8 @@ class _ListTasksState extends State<ListTasks> {
   String? selectedCategory = 'Care for loved ones';
   String? randomTask;
   bool showSecondContainer = false;
+  bool showThirdContainer = false;
+  bool isFinalSelection = false;
 
   void selectRandomTask(String category) {
     var filteredTasks = tasks
@@ -83,118 +85,182 @@ class _ListTasksState extends State<ListTasks> {
               children: [
                 Opacity(
                   opacity: showSecondContainer ? 0.5 : 1.0,
-                  child: Container(
-                    height: 183,
-                    width: 343,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: PHOColor.tasksColor),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'The amount for today' 's good deed',
-                              style: PHOTextstyle.s14w400.copyWith(
-                                  color: PHOColor.white.withOpacity(0.3)),
-                            ),
-                          ],
-                        ),
-                        if (selectedBudget != null)
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Text('\$${selectedBudget}',
-                                style: PHOTextstyle.s50w400),
+                  child: AbsorbPointer(
+                    absorbing: showSecondContainer,
+                    child: Container(
+                      height: showThirdContainer ? 117 : 183,
+                      width: 343,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: PHOColor.tasksColor),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'The amount for today' 's good deed',
+                                style: PHOTextstyle.s14w400.copyWith(
+                                    color: PHOColor.white.withOpacity(0.3)),
+                              ),
+                            ],
                           ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            _buildBudgetButton(5),
-                            _buildBudgetButton(10),
-                            _buildBudgetButton(20),
-                            _buildBudgetButton(30),
-                          ],
-                        ),
-                      ],
+                          if (selectedBudget != null)
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Text('\$$selectedBudget',
+                                  style: PHOTextstyle.s50w400),
+                            ),
+                          if (!isFinalSelection)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildBudgetButton(5),
+                                _buildBudgetButton(10),
+                                _buildBudgetButton(20),
+                                _buildBudgetButton(30),
+                              ],
+                            ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             if (showSecondContainer)
-              Container(
-                height: 209,
-                width: 343,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: PHOColor.tasksColor),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        children: [
-                          const SizedBox(
-                            width: 8,
+              Stack(
+                children: [
+                  Opacity(
+                    opacity: showThirdContainer ? 0.5 : 1.0,
+                    child: AbsorbPointer(
+                      absorbing: showThirdContainer,
+                      child: Container(
+                        height: !showThirdContainer ? 209 : 117,
+                        width: 343,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: PHOColor.tasksColor),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  Text(
+                                    'Select a category for your good deed',
+                                    style: PHOTextstyle.s14w400.copyWith(
+                                        color: PHOColor.white.withOpacity(0.3)),
+                                  ),
+                                ],
+                              ),
+                              if (selectedBudget != null)
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Text('$selectedCategory',
+                                      style: PHOTextstyle.s36w400),
+                                ),
+                              if (!isFinalSelection)
+                                Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        _buildCategoryButton(
+                                            'Care for loved ones'),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        _buildCategoryButton('Animals'),
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        _buildCategoryButton('Strangers'),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        _buildCategoryButton(
+                                            'Charity shopping'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                            ],
                           ),
-                          Text(
-                            'Select a category for your good deed',
-                            style: PHOTextstyle.s14w400.copyWith(
-                                color: PHOColor.white.withOpacity(0.3)),
-                          ),
-                        ],
-                      ),
-                      if (selectedBudget != null)
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text('\$${selectedBudget}',
-                              style: PHOTextstyle.s50w400),
                         ),
-                      Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildCategoryButton('Care for loved ones'),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              _buildCategoryButton('Animals'),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildCategoryButton('Strangers'),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              _buildCategoryButton('Charity shopping'),
-                            ],
-                          ),
-                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  showSecondContainer = true;
-                });
-              },
-              child: Text("Next"),
+            const SizedBox(
+              height: 20,
+            ),
+            if (showThirdContainer)
+              Container(
+                  height: 153,
+                  width: 343,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: PHOColor.green,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Good deed you can do today',
+                            style: PHOTextstyle.s14w400.copyWith(
+                                color: PHOColor.black.withOpacity(0.3))),
+                        const SizedBox(height: 8),
+                        Text(
+                          randomTask ?? 'No task available',
+                          style: PHOTextstyle.s36w400
+                              .copyWith(color: PHOColor.black),
+                        ),
+                      ],
+                    ),
+                  )),
+            SizedBox(
+              height: 133,
+            ),
+            Row(
+              children: [
+                if (isFinalSelection)
+                  IconButton(
+                      onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      if (!showSecondContainer) {
+                        showSecondContainer = true;
+                      } else {
+                        isFinalSelection = true;
+                        showThirdContainer = true;
+
+                        selectRandomTask(selectedCategory!);
+                      }
+                    });
+                  },
+                  child: Text(showSecondContainer ? 'Generate deed' : 'Next'),
+                ),
+              ],
             ),
           ],
         ),

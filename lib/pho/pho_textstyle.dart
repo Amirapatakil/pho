@@ -15,4 +15,6 @@ abstract class PHOTextstyle {
       TextStyle(fontSize: 50, fontWeight: FontWeight.w400);
   static const TextStyle s16w400 =
       TextStyle(fontSize: 16, fontWeight: FontWeight.w400);
+  static const TextStyle s36w400 =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.w400);
 }

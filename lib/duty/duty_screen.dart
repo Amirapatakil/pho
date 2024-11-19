@@ -48,12 +48,12 @@ class _DutyScreenState extends State<DutyScreen> {
                   child: TextButton(
                     onPressed: () {
                       setState(() {
-                        isOpenTasks = true; // Показать "Open tasks"
+                        isOpenTasks = true;
                       });
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: isOpenTasks
-                          ? PHOColor.blue4674FF // Синий фон, если активна
+                          ? PHOColor.blue4674FF
                           : Colors.transparent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -68,12 +68,12 @@ class _DutyScreenState extends State<DutyScreen> {
                   child: TextButton(
                     onPressed: () {
                       setState(() {
-                        isOpenTasks = false; // Показать "Closed tasks"
+                        isOpenTasks = false;
                       });
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: !isOpenTasks
-                          ? PHOColor.blue4674FF // Синий фон, если активна
+                          ? PHOColor.blue4674FF
                           : Colors.transparent,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -89,9 +89,8 @@ class _DutyScreenState extends State<DutyScreen> {
           ),
           Expanded(
             child: Center(
-              child: isOpenTasks
-                  ? _buildOpenTasksView() // Виджет для Open tasks
-                  : _buildClosedTasksView(),
+              child:
+                  isOpenTasks ? _buildOpenTasksView() : _buildClosedTasksView(),
             ),
           )
         ],
