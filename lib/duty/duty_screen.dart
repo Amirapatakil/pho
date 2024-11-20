@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:philantropic_offering_app/duty/widgets/close_tasks.dart';
+import 'package:philantropic_offering_app/duty/widgets/open_tasks.dart';
 import 'package:philantropic_offering_app/pho/pho_color.dart';
-import 'package:philantropic_offering_app/pho/pho_dimens.dart';
-import 'package:philantropic_offering_app/pho/pho_textstyle.dart';
 
 class DutyScreen extends StatefulWidget {
   const DutyScreen({super.key});
@@ -18,6 +18,9 @@ class _DutyScreenState extends State<DutyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        excludeHeaderSemantics: true,
+        forceMaterialTransparency: true,
+        automaticallyImplyLeading: false,
         title: Row(children: [
           Text(
             '#all-tasks',
@@ -31,15 +34,15 @@ class _DutyScreenState extends State<DutyScreen> {
       ),
       body: Column(
         children: [
-          const SizedBox(
-            height: PHODimens.smallPadding,
+          SizedBox(
+            height: 16.h,
           ),
           Container(
-            height: PHODimens.tasksheight,
-            width: PHODimens.taskswidth,
+            height: 32.h,
+            width: 343.w,
             decoration: BoxDecoration(
               color: PHOColor.taskUnSelected.withOpacity(0.24),
-              borderRadius: BorderRadius.circular(PHODimens.tasksradius),
+              borderRadius: BorderRadius.circular(8.r),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +63,11 @@ class _DutyScreenState extends State<DutyScreen> {
                       ),
                     ),
                     child: Text("Open tasks",
-                        style: PHOTextstyle.s13w600
-                            .copyWith(color: PHOColor.white)),
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: PHOColor.white,
+                        )),
                   ),
                 ),
                 Expanded(
@@ -76,12 +82,15 @@ class _DutyScreenState extends State<DutyScreen> {
                           ? PHOColor.blue4674FF
                           : Colors.transparent,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                     ),
                     child: Text("Closed tasks",
-                        style: PHOTextstyle.s13w600
-                            .copyWith(color: PHOColor.white)),
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: PHOColor.white,
+                        )),
                   ),
                 ),
               ],
@@ -89,72 +98,13 @@ class _DutyScreenState extends State<DutyScreen> {
           ),
           Expanded(
             child: Center(
-              child:
-                  isOpenTasks ? _buildOpenTasksView() : _buildClosedTasksView(),
+              child: isOpenTasks
+                  ? const BuildOpenTasksView()
+                  : const BuildClosedTasksView(),
             ),
           )
         ],
       ),
     );
   }
-}
-
-Widget _buildOpenTasksView() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: [
-      Text("No good deed generated yet ;(",
-          textAlign: TextAlign.center,
-          style: PHOTextstyle.s40w400
-              .copyWith(color: PHOColor.white.withOpacity(0.3))),
-      const SizedBox(
-        height: PHODimens.largePadding,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 80),
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: Column(
-            children: [
-              Text("Tap, to generate \ngood deed for today",
-                  textAlign: TextAlign.center,
-                  style: PHOTextstyle.s14w700
-                      .copyWith(color: PHOColor.white.withOpacity(0.3))),
-              // Image.asset('assets/images/vector.png')
-            ],
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-Widget _buildClosedTasksView() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.end,
-    children: [
-      Text("No good deed generated yet ;(",
-          textAlign: TextAlign.center,
-          style: PHOTextstyle.s40w400
-              .copyWith(color: PHOColor.white.withOpacity(0.3))),
-      const SizedBox(
-        height: PHODimens.largePadding,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 80),
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: Column(
-            children: [
-              Text("Tap, to generate \ngood deed for today",
-                  textAlign: TextAlign.center,
-                  style: PHOTextstyle.s14w700
-                      .copyWith(color: PHOColor.white.withOpacity(0.3))),
-              // Image.asset('assets/images/vector.png')
-            ],
-          ),
-        ),
-      ),
-    ],
-  );
 }

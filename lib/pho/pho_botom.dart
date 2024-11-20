@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:philantropic_offering_app/duty/duty_screen.dart';
-import 'package:philantropic_offering_app/generate_ideas/list_tasks.dart';
+import 'package:philantropic_offering_app/generate_ideas/generate_ideas_screen.dart';
 import 'package:philantropic_offering_app/nastroy/nastroy_screen.dart';
 import 'package:philantropic_offering_app/pho/pho_color.dart';
 import 'package:philantropic_offering_app/pho/pho_moti.dart';
@@ -23,65 +23,73 @@ class PHOBotBarState extends State<PHOBotBar> {
         index: _currentIndex,
         children: _pages,
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/botom.png',
+      bottomNavigationBar: ClipRRect(
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/botom.png',
+              ),
+              fit: BoxFit.fill,
             ),
-            fit: BoxFit.fill,
           ),
-        ),
-        height: 110.h,
-        width: MediaQuery.of(context).size.width,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: buildNavItem(
-                0,
-                'assets/icons/btm1.svg',
-                'assets/icons/btm1det.svg',
-                'Tasks',
+          height: 110.h,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: buildNavItem(
+                  0,
+                  'assets/icons/btm1.svg',
+                  'assets/icons/btm1det.svg',
+                  'Tasks',
+                ),
               ),
-            ),
-            SizedBox(width: 80.w),
-            Expanded(
-              child: buildNavItem(
-                1,
-                'assets/icons/btm2.svg',
-                'assets/icons/btm2det.svg',
-                'Settings',
+              SizedBox(width: 80.w),
+              Expanded(
+                child: buildNavItem(
+                  1,
+                  'assets/icons/btm2.svg',
+                  'assets/icons/btm2det.svg',
+                  'Settings',
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Container(
-            height: 80.h,
-            width: 80.w,
-            decoration: const BoxDecoration(
-              color: PHOColor.blue4674FF,
-              shape: BoxShape.circle,
-            ),
-            child: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const ListTasks()));
-              },
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              child: SvgPicture.asset(
-                'assets/icons/float.svg',
+      floatingActionButton: Padding(
+        padding: EdgeInsets.all(10.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              height: 80.h,
+              width: 80.w,
+              decoration: const BoxDecoration(
+                color: PHOColor.blue4674FF,
+                shape: BoxShape.circle,
+              ),
+              child: FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const GenerateIdeasScreen()));
+                },
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                child: SvgPicture.asset(
+                  'assets/icons/float.svg',
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 30.w)
-        ],
+            SizedBox(height: 30.w)
+          ],
+        ),
       ),
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,

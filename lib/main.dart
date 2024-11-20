@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:philantropic_offering_app/pho/pho_botom.dart';
 import 'package:philantropic_offering_app/pho/pho_color.dart';
+import 'package:philantropic_offering_app/service/hive/task.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final directory = await getApplicationDocumentsDirectory();
+  Hive.init(directory.path);
+
+  Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox<Task>('tasks');
   runApp(const MyApp());
 }
 

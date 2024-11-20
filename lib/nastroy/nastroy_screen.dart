@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:philantropic_offering_app/nastroy/widgets/elevated_button_nastroy.dart';
 import 'package:philantropic_offering_app/pho/pho_color.dart';
-import 'widgets/elevated_buttom.dart';
 
 class NastroyScreen extends StatelessWidget {
   const NastroyScreen({super.key});
@@ -24,35 +24,38 @@ class NastroyScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width / 12, vertical: 16),
-        child: const Column(
+        padding: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 16.sp),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const ElevatedButtom(
+            ElevatedButtonNastroy(
               iconPath: 'assets/images/locked.png',
               text: 'Privacy Policy',
+              onPressed: () {},
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const ElevatedButtom(
+            ElevatedButtonNastroy(
               iconPath: 'assets/images/folder.png',
               text: 'Terms of Use',
+              onPressed: () {},
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const ElevatedButtom(
+            ElevatedButtonNastroy(
               iconPath: 'assets/images/arrow.png',
               text: 'Share App',
+              onPressed: () {},
             ),
-            const SizedBox(
-              height: 20,
+            SizedBox(
+              height: 20.h,
             ),
-            const ElevatedButtom(
+            ElevatedButtonNastroy(
               iconPath: 'assets/images/star.png',
               text: 'Support',
+              onPressed: () {},
             )
           ],
         ),
