@@ -21,12 +21,7 @@ class _BuildOpenTasksViewState extends State<BuildOpenTasksView> {
     super.initState();
     uncompletedTasksNotifier = ValueNotifier<List<Task>>([]);
     _loadTasks();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _loadTasks();
+    print('initState');
   }
 
   void _loadTasks() {

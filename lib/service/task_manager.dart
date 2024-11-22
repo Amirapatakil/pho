@@ -7,7 +7,7 @@ void saveTask(
     required String? category,
     required int? budget}) async {
   var taskBox = Hive.box<Task>('tasks');
-  await taskBox.clear();
+
   var newTask =
       Task(description: description, category: category, budget: budget);
   await taskBox.add(newTask);
