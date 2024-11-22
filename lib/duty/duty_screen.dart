@@ -38,8 +38,7 @@ class _DutyScreenState extends State<DutyScreen> {
             height: 16.h,
           ),
           Container(
-            height: 32.h,
-            width: 343.w,
+            margin: EdgeInsets.symmetric(horizontal: 16.w),
             decoration: BoxDecoration(
               color: PHOColor.taskUnSelected.withOpacity(0.24),
               borderRadius: BorderRadius.circular(8.r),

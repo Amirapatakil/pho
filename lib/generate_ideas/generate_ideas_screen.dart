@@ -1,17 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hive/hive.dart';
-import 'package:intl/intl.dart';
 import 'package:philantropic_offering_app/generate_ideas/widgets/budget_button.dart';
 import 'package:philantropic_offering_app/generate_ideas/widgets/elevated_button_ideas.dart';
 import 'package:philantropic_offering_app/generate_ideas/widgets/task_container.dart.dart';
 import 'package:philantropic_offering_app/pho/pho_botom.dart';
 import 'package:philantropic_offering_app/pho/pho_color.dart';
-import 'package:philantropic_offering_app/pho/pho_textstyle.dart';
 import 'package:philantropic_offering_app/generate_ideas/data/list_of_tasks.dart';
-import 'package:philantropic_offering_app/service/hive/task.dart';
 import 'package:philantropic_offering_app/service/task_manager.dart';
 
 class GenerateIdeasScreen extends StatefulWidget {
@@ -99,11 +94,13 @@ class _GenerateIdeasScreenState extends State<GenerateIdeasScreen> {
                           ),
                           if (selectedBudget != null)
                             Expanded(
-                              child: Text('\$$selectedBudget',
-                                  style: TextStyle(
-                                      fontSize: 50.sp,
-                                      fontWeight: FontWeight.w400,
-                                      color: PHOColor.white)),
+                              child: FittedBox(
+                                child: Text('\$$selectedBudget',
+                                    style: TextStyle(
+                                        fontSize: 50.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: PHOColor.white)),
+                              ),
                             ),
                           if (!showSecondContainer)
                             Expanded(
@@ -154,8 +151,18 @@ class _GenerateIdeasScreenState extends State<GenerateIdeasScreen> {
                               ],
                             ),
                             if (selectedBudget != null)
-                              Text('$selectedCategory',
-                                  style: PHOTextstyle.s36w400),
+                              Expanded(
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    '$selectedCategory',
+                                    style: TextStyle(
+                                      fontSize: 32.sp,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             if (!isFinalSelection)
                               Column(
                                 children: [
@@ -196,7 +203,7 @@ class _GenerateIdeasScreenState extends State<GenerateIdeasScreen> {
             ),
             if (showThirdContainer)
               TaskContainer(
-                  height: 153.h,
+                  // height: 153.h,
                   showContainer: showThirdContainer,
                   color: PHOColor.green,
                   child: SingleChildScrollView(
@@ -224,9 +231,6 @@ class _GenerateIdeasScreenState extends State<GenerateIdeasScreen> {
                     ),
                   )),
             Expanded(child: Container()),
-            SizedBox(
-              height: 133.h,
-            ),
             Row(
               children: [
                 if (isFinalSelection == false)
@@ -282,6 +286,7 @@ class _GenerateIdeasScreenState extends State<GenerateIdeasScreen> {
                             category: selectedCategory ?? '',
                             description: randomTask ?? 'No task',
                             budget: selectedBudget ?? 0,
+                            context: context,
                           );
                           Navigator.push(
                               context,

@@ -10,4 +10,5 @@ abstract class PHOColor {
   static const Color greyBDBDBD = Color(0xFFBDBDBD);
   static const Color taskUnSelected = Color(0xFF767680);
   static const Color tasksColor = Color(0xFF10193A);
+  static const Color ftoastColor = Color(0xFF10272A);
 }

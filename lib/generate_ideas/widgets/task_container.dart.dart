@@ -12,14 +12,14 @@ class TaskContainer extends StatelessWidget {
     required this.showContainer,
     required this.child,
     required this.color,
-    required this.height,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      width: 343.w,
+      // width: 343.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.r),
         color: color,

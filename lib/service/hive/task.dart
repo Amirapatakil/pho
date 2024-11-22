@@ -16,20 +16,13 @@ class Task {
   @HiveField(3)
   bool? isCompleted = false;
 
+  @HiveField(4)
+  final String? date;
+
   Task(
       {required this.description,
       required this.category,
       required this.budget,
-      this.isCompleted = false});
-}
-
-@HiveType(typeId: 1)
-class Date {
-  @HiveField(0)
-  final String date;
-
-  @HiveField(1)
-  final bool hasGeneratedTask;
-
-  Date({required this.date, required this.hasGeneratedTask});
+      this.isCompleted = false,
+      required this.date});
 }
